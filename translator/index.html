@@ -1,0 +1,2180 @@
+<section style="background-color: azure;">
+<h2>New en.json</h2><textarea id="new-en"></textarea>
+<h2>Old en.json</h2><textarea id="old-en"></textarea>
+</section>
+
+<section>
+  <h2>da.json</h2><textarea class="lang"></textarea>
+  <h2>de.json</h2><textarea class="lang"></textarea>
+  <h2>es.json</h2><textarea class="lang"></textarea>
+  <h2>fi.json</h2><textarea class="lang"></textarea>
+  <h2>fr.json</h2><textarea class="lang"></textarea>
+  <h2>hi.json</h2><textarea class="lang"></textarea>
+  <h2>it.json</h2><textarea class="lang"></textarea>
+  <h2>ja.json</h2><textarea class="lang"></textarea>
+  <h2>ko.json</h2><textarea class="lang"></textarea>
+  <h2>ms.json</h2><textarea class="lang"></textarea>
+  <h2>nb.json</h2><textarea class="lang"></textarea>
+  <h2>nl.json</h2><textarea class="lang"></textarea>
+  <h2>pt-BR.json</h2><textarea class="lang"></textarea>
+  <h2>pt-PT.json</h2><textarea class="lang"></textarea>
+  <h2>sv.json</h2><textarea class="lang"></textarea>
+  <h2>th.json</h2><textarea class="lang"></textarea>
+  <h2>zh-CN.json</h2><textarea class="lang"></textarea>
+  <h2>zh-TW.json</h2><textarea class="lang"></textarea>
+</section>
+
+<section>
+  <button id="submit">Start</button>
+</section>
+
+<style>
+section {
+  padding: 20px;
+}
+textarea {
+  width: 100%;
+  height: 80px;
+}
+
+button {
+  padding: 20px;
+  min-width: 200px;
+}
+
+</style>
+
+
+<script type="text/javascript">
+
+  /* Load Data */ 
+
+  function loadDataAuto() {
+    document.NEW_EN = JSON.parse(document.getElementById("new-en").value);
+    document.OLD_EN = JSON.parse(document.getElementById("old-en").value);
+    document.OLD_LANG = {};
+    document.querySelectorAll('.lang').forEach(el => {
+      var key = el.previousElementSibling.innerText;
+      var val = el.value;
+      if (val.length) {
+        document.OLD_LANG[key] = JSON.parse(val);
+      }
+    });
+  }
+ 
+  function loadDataManual() {
+    document.NEW_EN = {
+  "name": "Custom content",
+  "content": {
+    "blocks": {
+      "text": {
+        "name": "Text",
+        "settings": {
+          "title": {
+            "default": "Talk about your brand",
+            "label": "Heading"
+          },
+          "width": {
+            "label": "Container width",
+            "options": {
+              "25%": {
+                "label": "25%"
+              },
+              "33%": {
+                "label": "33%"
+              },
+              "50%": {
+                "label": "50%"
+              },
+              "66%": {
+                "label": "66%"
+              },
+              "75%": {
+                "label": "75%"
+              },
+              "100%": {
+                "label": "100%"
+              }
+            }
+          },
+          "alignment": {
+            "label": "Vertical alignment",
+            "options": {
+              "top_middle": {
+                "label": "Top"
+              },
+              "middle": {
+                "label": "Middle"
+              },
+              "bottom_middle": {
+                "label": "Bottom"
+              }
+            }
+          },
+          "align_text": {
+            "label": "Horizontal alignment",
+            "options": {
+              "left": {
+                "label": "Left"
+              },
+              "center": {
+                "label": "Centered"
+              },
+              "right": {
+                "label": "Right"
+              }
+            }
+          }
+        }
+      },
+      "image": {
+        "name": "Image",
+        "settings": {
+          "width": {
+            "label": "Container width",
+            "options": {
+              "25%": {
+                "label": "25%"
+              },
+              "33%": {
+                "label": "33%"
+              },
+              "50%": {
+                "label": "50%"
+              },
+              "66%": {
+                "label": "66%"
+              },
+              "75%": {
+                "label": "75%"
+              },
+              "100%": {
+                "label": "100%"
+              }
+            }
+          },
+          "alignment": {
+            "label": "Vertical alignment",
+            "options": {
+              "top_left": {
+                "label": "Top left"
+              },
+              "top_middle": {
+                "label": "Top middle"
+              },
+              "top_right": {
+                "label": "Top right"
+              },
+              "middle_left": {
+                "label": "Middle left"
+              },
+              "middle": {
+                "label": "Middle"
+              },
+              "middle_right": {
+                "label": "Middle right"
+              },
+              "bottom_left": {
+                "label": "Bottom left"
+              },
+              "bottom_middle": {
+                "label": "Bottom middle"
+              },
+              "bottom_right": {
+                "label": "Bottom right"
+              }
+            }
+          }
+        }
+      },
+      "video": {
+        "name": "Video",
+        "settings": {
+          "width": {
+            "label": "Container width",
+            "options": {
+              "25%": {
+                "label": "25%"
+              },
+              "33%": {
+                "label": "33%"
+              },
+              "50%": {
+                "label": "50%"
+              },
+              "66%": {
+                "label": "66%"
+              },
+              "75%": {
+                "label": "75%"
+              },
+              "100%": {
+                "label": "100%"
+              }
+            }
+          },
+          "alignment": {
+            "label": "Vertical alignment",
+            "options": {
+              "top_middle": {
+                "label": "Top"
+              },
+              "middle": {
+                "label": "Middle"
+              },
+              "bottom_middle": {
+                "label": "Bottom"
+              }
+            }
+          }
+        }
+      },
+      "product": {
+        "name": "Product",
+        "settings": {
+          "width": {
+            "label": "Container width",
+            "options": {
+              "25%": {
+                "label": "25%"
+              },
+              "33%": {
+                "label": "33%"
+              },
+              "50%": {
+                "label": "50%"
+              },
+              "66%": {
+                "label": "66%"
+              },
+              "75%": {
+                "label": "75%"
+              },
+              "100%": {
+                "label": "100%"
+              }
+            }
+          },
+          "alignment": {
+            "label": "Vertical alignment",
+            "options": {
+              "top_left": {
+                "label": "Top left"
+              },
+              "top_middle": {
+                "label": "Top middle"
+              },
+              "top_right": {
+                "label": "Top right"
+              },
+              "middle_left": {
+                "label": "Middle left"
+              },
+              "middle": {
+                "label": "Middle"
+              },
+              "middle_right": {
+                "label": "Middle right"
+              },
+              "bottom_left": {
+                "label": "Bottom left"
+              },
+              "bottom_middle": {
+                "label": "Bottom middle"
+              },
+              "bottom_right": {
+                "label": "Bottom right"
+              }
+            }
+          }
+        }
+      },
+      "collection": {
+        "name": "Collection",
+        "settings": {
+          "width": {
+            "label": "Container width",
+            "options": {
+              "25%": {
+                "label": "25%"
+              },
+              "33%": {
+                "label": "33%"
+              },
+              "50%": {
+                "label": "50%"
+              },
+              "66%": {
+                "label": "66%"
+              },
+              "75%": {
+                "label": "75%"
+              },
+              "100%": {
+                "label": "100%"
+              }
+            }
+          }
+        }
+      },
+      "blog": {
+        "name": "Blog",
+        "settings": {
+          "cover_image": {
+            "label": "Cover image"
+          },
+          "image_size": {
+            "options": {
+              "small": {
+                "label": "Small"
+              },
+              "medium": {
+                "label": "Medium"
+              },
+              "large": {
+                "label": "Large"
+              }
+            },
+            "label": "Image size"
+          },
+          "description": {
+            "default": "<p>Description of your blog.</p>",
+            "label": "Description"
+          },
+          "show_number_articles": {
+            "label": "Show number of articles"
+          },
+          "width": {
+            "label": "Container width",
+            "options": {
+              "25%": {
+                "label": "25%"
+              },
+              "33%": {
+                "label": "33%"
+              },
+              "50%": {
+                "label": "50%"
+              },
+              "66%": {
+                "label": "66%"
+              },
+              "75%": {
+                "label": "75%"
+              },
+              "100%": {
+                "label": "100%"
+              }
+            }
+          },
+          "alignment": {
+            "label": "Vertical alignment",
+            "options": {
+              "top_middle": {
+                "label": "Top"
+              },
+              "middle": {
+                "label": "Middle"
+              },
+              "bottom_middle": {
+                "label": "Bottom"
+              }
+            }
+          }
+        }
+      },
+      "article": {
+        "name": "Article",
+        "settings": {
+          "width": {
+            "label": "Container width",
+            "options": {
+              "25%": {
+                "label": "25%"
+              },
+              "33%": {
+                "label": "33%"
+              },
+              "50%": {
+                "label": "50%"
+              },
+              "66%": {
+                "label": "66%"
+              },
+              "75%": {
+                "label": "75%"
+              },
+              "100%": {
+                "label": "100%"
+              }
+            }
+          },
+          "alignment": {
+            "label": "Vertical alignment",
+            "options": {
+              "top_middle": {
+                "label": "Top"
+              },
+              "middle": {
+                "label": "Middle"
+              },
+              "bottom_middle": {
+                "label": "Bottom"
+              }
+            }
+          },
+          "cover_image": {
+            "options": {
+              "small": {
+                "label": "Small"
+              },
+              "large": {
+                "label": "Large"
+              },
+              "none": {
+                "label": "None"
+              }
+            },
+            "label": "Cover image"
+          },
+          "show_author": {
+            "label": "Show author"
+          },
+          "show_date": {
+            "label": "Show date"
+          }
+        }
+      },
+      "menu": {
+        "name": "Menu",
+        "info": "This menu won't show dropdown items.",
+        "settings": {
+          "menu_inline": {
+            "label": "Display links inline"
+          },
+          "width": {
+            "label": "Container width",
+            "options": {
+              "25%": {
+                "label": "25%"
+              },
+              "33%": {
+                "label": "33%"
+              },
+              "50%": {
+                "label": "50%"
+              },
+              "66%": {
+                "label": "66%"
+              },
+              "75%": {
+                "label": "75%"
+              },
+              "100%": {
+                "label": "100%"
+              }
+            }
+          },
+          "alignment": {
+            "label": "Vertical alignment",
+            "options": {
+              "top_left": {
+                "label": "Top left"
+              },
+              "top_middle": {
+                "label": "Top middle"
+              },
+              "top_right": {
+                "label": "Top right"
+              },
+              "middle_left": {
+                "label": "Middle left"
+              },
+              "middle": {
+                "label": "Middle"
+              },
+              "middle_right": {
+                "label": "Middle right"
+              },
+              "bottom_left": {
+                "label": "Bottom left"
+              },
+              "bottom_middle": {
+                "label": "Bottom middle"
+              },
+              "bottom_right": {
+                "label": "Bottom right"
+              }
+            }
+          }
+        }
+      },
+      "custom_html": {
+        "name": "Custom HTML",
+        "settings": {
+          "width": {
+            "label": "Container width",
+            "options": {
+              "25%": {
+                "label": "25%"
+              },
+              "33%": {
+                "label": "33%"
+              },
+              "50%": {
+                "label": "50%"
+              },
+              "66%": {
+                "label": "66%"
+              },
+              "75%": {
+                "label": "75%"
+              },
+              "100%": {
+                "label": "100%"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "presets": {
+    "custom_content": {
+      "name": "Custom content",
+      "category": "Advanced layout"
+    }
+  }
+}
+    document.OLD_EN = {
+  "name": "Custom content",
+  "settings": {
+    "title": {
+      "label": "Heading",
+      "default": "Custom content"
+    }
+  },
+  "blocks": {
+    "text": {
+      "name": "Text",
+      "settings": {
+        "title": {
+          "label": "Heading",
+          "default": "Talk about your brand"
+        },
+        "text": {
+          "label": "Text",
+          "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+        },
+        "width": {
+          "label": "Container width",
+          "options": {
+            "25%": {
+              "label": "25%"
+            },
+            "33%": {
+              "label": "33%"
+            },
+            "50%": {
+              "label": "50%"
+            },
+            "66%": {
+              "label": "66%"
+            },
+            "75%": {
+              "label": "75%"
+            },
+            "100%": {
+              "label": "100%"
+            }
+          }
+        },
+        "alignment": {
+          "label": "Vertical alignment",
+          "options": {
+            "top-middle": {
+              "label": "Top"
+            },
+            "center": {
+              "label": "Middle"
+            },
+            "bottom-middle": {
+              "label": "Bottom"
+            }
+          }
+        },
+        "align_text": {
+          "label": "Horizontal alignment",
+          "options": {
+            "left": {
+              "label": "Left"
+            },
+            "center": {
+              "label": "Centered"
+            },
+            "right": {
+              "label": "Right"
+            }
+          }
+        }
+      }
+    },
+    "image": {
+      "name": "Image",
+      "settings": {
+        "image": {
+          "label": "Image"
+        },
+        "width": {
+          "label": "Container width",
+          "options": {
+            "25%": {
+              "label": "25%"
+            },
+            "33%": {
+              "label": "33%"
+            },
+            "50%": {
+              "label": "50%"
+            },
+            "66%": {
+              "label": "66%"
+            },
+            "75%": {
+              "label": "75%"
+            },
+            "100%": {
+              "label": "100%"
+            }
+          }
+        },
+        "alignment": {
+          "label": "Vertical alignment",
+          "options": {
+            "top-left": {
+              "label": "Top left"
+            },
+            "top-middle": {
+              "label": "Top middle"
+            },
+            "top-right": {
+              "label": "Top right"
+            },
+            "middle-left": {
+              "label": "Middle left"
+            },
+            "center": {
+              "label": "Middle"
+            },
+            "middle-right": {
+              "label": "Middle right"
+            },
+            "bottom-left": {
+              "label": "Bottom left"
+            },
+            "bottom-middle": {
+              "label": "Bottom middle"
+            },
+            "bottom-right": {
+              "label": "Bottom right"
+            }
+          }
+        }
+      }
+    },
+    "video": {
+      "name": "Video",
+      "settings": {
+        "video_url": {
+          "label": "YouTube or Vimeo link"
+        },
+        "width": {
+          "label": "Container width",
+          "options": {
+            "25%": {
+              "label": "25%"
+            },
+            "33%": {
+              "label": "33%"
+            },
+            "50%": {
+              "label": "50%"
+            },
+            "66%": {
+              "label": "66%"
+            },
+            "75%": {
+              "label": "75%"
+            },
+            "100%": {
+              "label": "100%"
+            }
+          }
+        },
+        "alignment": {
+          "label": "Vertical alignment",
+          "options": {
+            "top-middle": {
+              "label": "Top"
+            },
+            "center": {
+              "label": "Middle"
+            },
+            "bottom-middle": {
+              "label": "Bottom"
+            }
+          }
+        }
+      }
+    },
+    "product": {
+      "name": "Product",
+      "settings": {
+        "product": {
+          "label": "Product"
+        },
+        "width": {
+          "label": "Container width",
+          "options": {
+            "25%": {
+              "label": "25%"
+            },
+            "33%": {
+              "label": "33%"
+            },
+            "50%": {
+              "label": "50%"
+            },
+            "66%": {
+              "label": "66%"
+            },
+            "75%": {
+              "label": "75%"
+            },
+            "100%": {
+              "label": "100%"
+            }
+          }
+        },
+        "alignment": {
+          "label": "Vertical alignment",
+          "options": {
+            "top-left": {
+              "label": "Top left"
+            },
+            "top-middle": {
+              "label": "Top middle"
+            },
+            "top-right": {
+              "label": "Top right"
+            },
+            "middle-left": {
+              "label": "Middle left"
+            },
+            "center": {
+              "label": "Middle"
+            },
+            "middle-right": {
+              "label": "Middle right"
+            },
+            "bottom-left": {
+              "label": "Bottom left"
+            },
+            "bottom-middle": {
+              "label": "Bottom middle"
+            },
+            "bottom-right": {
+              "label": "Bottom right"
+            }
+          }
+        }
+      }
+    },
+    "collection": {
+      "name": "Collection",
+      "settings": {
+        "collection": {
+          "label": "Collection"
+        },
+        "width": {
+          "label": "Container width",
+          "options": {
+            "25%": {
+              "label": "25%"
+            },
+            "33%": {
+              "label": "33%"
+            },
+            "50%": {
+              "label": "50%"
+            },
+            "66%": {
+              "label": "66%"
+            },
+            "75%": {
+              "label": "75%"
+            },
+            "100%": {
+              "label": "100%"
+            }
+          }
+        }
+      }
+    },
+    "custom-html": {
+      "name": "Custom HTML",
+      "settings": {
+        "code": {
+          "label": "HTML"
+        },
+        "width": {
+          "label": "Container width",
+          "options": {
+            "25%": {
+              "label": "25%"
+            },
+            "33%": {
+              "label": "33%"
+            },
+            "50%": {
+              "label": "50%"
+            },
+            "66%": {
+              "label": "66%"
+            },
+            "75%": {
+              "label": "75%"
+            },
+            "100%": {
+              "label": "100%"
+            }
+          }
+        }
+      }
+    },
+    "menu": {
+      "name": "Menu",
+      "settings": {
+        "menu": {
+          "label": "Menu"
+        },
+        "width": {
+          "label": "Container width",
+          "options": {
+            "25%": {
+              "label": "25%"
+            },
+            "33%": {
+              "label": "33%"
+            },
+            "50%": {
+              "label": "50%"
+            },
+            "66%": {
+              "label": "66%"
+            },
+            "75%": {
+              "label": "75%"
+            },
+            "100%": {
+              "label": "100%"
+            }
+          }
+        },
+        "alignment": {
+          "label": "Vertical alignment",
+          "options": {
+            "top-left": {
+              "label": "Top left"
+            },
+            "top-middle": {
+              "label": "Top middle"
+            },
+            "top-right": {
+              "label": "Top right"
+            },
+            "middle-left": {
+              "label": "Middle left"
+            },
+            "center": {
+              "label": "Middle"
+            },
+            "middle-right": {
+              "label": "Middle right"
+            },
+            "bottom-left": {
+              "label": "Bottom left"
+            },
+            "bottom-middle": {
+              "label": "Bottom middle"
+            },
+            "bottom-right": {
+              "label": "Bottom right"
+            }
+          }
+        }
+      }
+    },
+    "blog": {
+      "name": "Blog",
+      "settings": {
+        "blog": {
+          "label": "Blog"
+        },
+        "cover_image": {
+          "label": "Cover image"
+        },
+        "image_size": {
+          "label": "Image size",
+          "options": {
+            "small": {
+              "label": "Small"
+            },
+            "medium": {
+              "label": "Medium"
+            },
+            "large": {
+              "label": "Large"
+            }
+          }
+        },
+        "description": {
+          "label": "Description",
+          "default": "<p>Description of your blog.</p>"
+        },
+        "show_number_articles": {
+          "label": "Show number of articles"
+        },
+        "width": {
+          "label": "Container width",
+          "options": {
+            "25%": {
+              "label": "25%"
+            },
+            "33%": {
+              "label": "33%"
+            },
+            "50%": {
+              "label": "50%"
+            },
+            "66%": {
+              "label": "66%"
+            },
+            "75%": {
+              "label": "75%"
+            },
+            "100%": {
+              "label": "100%"
+            }
+          }
+        },
+        "alignment": {
+          "label": "Vertical alignment",
+          "options": {
+            "top": {
+              "label": "Top"
+            },
+            "center": {
+              "label": "Middle"
+            },
+            "bottom": {
+              "label": "Bottom"
+            }
+          }
+        }
+      }
+    },
+    "article": {
+      "name": "Article",
+      "settings": {
+        "article": {
+          "label": "Article"
+        },
+        "width": {
+          "label": "Container width",
+          "options": {
+            "25%": {
+              "label": "25%"
+            },
+            "33%": {
+              "label": "33%"
+            },
+            "50%": {
+              "label": "50%"
+            },
+            "66%": {
+              "label": "66%"
+            },
+            "75%": {
+              "label": "75%"
+            },
+            "100%": {
+              "label": "100%"
+            }
+          }
+        },
+        "alignment": {
+          "label": "Vertical alignment",
+          "options": {
+            "top-middle": {
+              "label": "Top"
+            },
+            "center": {
+              "label": "Middle"
+            },
+            "bottom-middle": {
+              "label": "Bottom"
+            }
+          }
+        },
+        "cover_image": {
+          "label": "Cover image",
+          "options": {
+            "small": {
+              "label": "Small"
+            },
+            "large": {
+              "label": "Large"
+            },
+            "none": {
+              "label": "None"
+            }
+          }
+        },
+        "show_author": {
+          "label": "Show author"
+        },
+        "show_date": {
+          "label": "Show date"
+        }
+      }
+    }
+  },
+  "presets": {
+    "custom-content": {
+      "name": "Custom content",
+      "category": "Advanced layout"
+    }
+  }
+}
+    document.OLD_LANG = {
+      "da.json": {
+  "name": "Tilpasset indhold",
+  "settings": {
+    "title": {
+      "label": "Overskrift",
+      "default": "Tilpasset indhold"
+    }
+  },
+  "blocks": {
+    "text": {
+      "name": "Tekst",
+      "settings": {
+        "title": {
+          "label": "Overskrift",
+          "default": "Fortæl om dit brand"
+        },
+        "text": {
+          "label": "Tekst",
+          "default": "<p>Brug denne tekst til at dele oplysninger om dit brand med dine kunder. Beskriv et produkt, del meddelelser, eller byd kunder velkommen til din butik.</p>"
+        },
+        "width": {
+          "label": "Containerbredde",
+          "options": {
+            "25%": {
+              "label": "25 %"
+            },
+            "33%": {
+              "label": "33 %"
+            },
+            "50%": {
+              "label": "50 %"
+            },
+            "66%": {
+              "label": "66 %"
+            },
+            "75%": {
+              "label": "75 %"
+            },
+            "100%": {
+              "label": "100 %"
+            }
+          }
+        },
+        "alignment": {
+          "label": "Lodret justering",
+          "options": {
+            "top-middle": {
+              "label": "Top"
+            },
+            "center": {
+              "label": "I midten"
+            },
+            "bottom-middle": {
+              "label": "Bund"
+            }
+          }
+        },
+        "align_text": {
+          "label": "Vandret justering",
+          "options": {
+            "left": {
+              "label": "Venstre"
+            },
+            "center": {
+              "label": "Centreret"
+            },
+            "right": {
+              "label": "Højre"
+            }
+          }
+        }
+      }
+    },
+    "image": {
+      "name": "Billede",
+      "settings": {
+        "image": {
+          "label": "Billede"
+        },
+        "width": {
+          "label": "Containerbredde",
+          "options": {
+            "25%": {
+              "label": "25 %"
+            },
+            "33%": {
+              "label": "33 %"
+            },
+            "50%": {
+              "label": "50 %"
+            },
+            "66%": {
+              "label": "66 %"
+            },
+            "75%": {
+              "label": "75 %"
+            },
+            "100%": {
+              "label": "100 %"
+            }
+          }
+        },
+        "alignment": {
+          "label": "Lodret justering",
+          "options": {
+            "top-left": {
+              "label": "Øverst til venstre"
+            },
+            "top-middle": {
+              "label": "Øverst i midten"
+            },
+            "top-right": {
+              "label": "Øverst til højre"
+            },
+            "middle-left": {
+              "label": "Midt på til venstre"
+            },
+            "center": {
+              "label": "I midten"
+            },
+            "middle-right": {
+              "label": "Midt på til højre"
+            },
+            "bottom-left": {
+              "label": "Nederst til venstre"
+            },
+            "bottom-middle": {
+              "label": "Nederst i midten"
+            },
+            "bottom-right": {
+              "label": "Nederst til højre"
+            }
+          }
+        }
+      }
+    },
+    "video": {
+      "name": "Video",
+      "settings": {
+        "video_url": {
+          "label": "Link til YouTube eller Vimeo"
+        },
+        "width": {
+          "label": "Containerbredde",
+          "options": {
+            "25%": {
+              "label": "25 %"
+            },
+            "33%": {
+              "label": "33 %"
+            },
+            "50%": {
+              "label": "50 %"
+            },
+            "66%": {
+              "label": "66 %"
+            },
+            "75%": {
+              "label": "75 %"
+            },
+            "100%": {
+              "label": "100 %"
+            }
+          }
+        },
+        "alignment": {
+          "label": "Lodret justering",
+          "options": {
+            "top-middle": {
+              "label": "Top"
+            },
+            "center": {
+              "label": "I midten"
+            },
+            "bottom-middle": {
+              "label": "Bund"
+            }
+          }
+        }
+      }
+    },
+    "product": {
+      "name": "Produkt",
+      "settings": {
+        "product": {
+          "label": "Produkt"
+        },
+        "width": {
+          "label": "Containerbredde",
+          "options": {
+            "25%": {
+              "label": "25 %"
+            },
+            "33%": {
+              "label": "33 %"
+            },
+            "50%": {
+              "label": "50 %"
+            },
+            "66%": {
+              "label": "66 %"
+            },
+            "75%": {
+              "label": "75 %"
+            },
+            "100%": {
+              "label": "100 %"
+            }
+          }
+        },
+        "alignment": {
+          "label": "Lodret justering",
+          "options": {
+            "top-left": {
+              "label": "Øverst til venstre"
+            },
+            "top-middle": {
+              "label": "Øverst i midten"
+            },
+            "top-right": {
+              "label": "Øverst til højre"
+            },
+            "middle-left": {
+              "label": "Midt på til venstre"
+            },
+            "center": {
+              "label": "I midten"
+            },
+            "middle-right": {
+              "label": "Midt på til højre"
+            },
+            "bottom-left": {
+              "label": "Nederst til venstre"
+            },
+            "bottom-middle": {
+              "label": "Nederst i midten"
+            },
+            "bottom-right": {
+              "label": "Nederst til højre"
+            }
+          }
+        }
+      }
+    },
+    "collection": {
+      "name": "Kollektion",
+      "settings": {
+        "collection": {
+          "label": "Kollektion"
+        },
+        "width": {
+          "label": "Containerbredde",
+          "options": {
+            "25%": {
+              "label": "25 %"
+            },
+            "33%": {
+              "label": "33 %"
+            },
+            "50%": {
+              "label": "50 %"
+            },
+            "66%": {
+              "label": "66 %"
+            },
+            "75%": {
+              "label": "75 %"
+            },
+            "100%": {
+              "label": "100 %"
+            }
+          }
+        }
+      }
+    },
+    "custom-html": {
+      "name": "Tilpasset HTML",
+      "settings": {
+        "code": {
+          "label": "HTML"
+        },
+        "width": {
+          "label": "Containerbredde",
+          "options": {
+            "25%": {
+              "label": "25 %"
+            },
+            "33%": {
+              "label": "33 %"
+            },
+            "50%": {
+              "label": "50 %"
+            },
+            "66%": {
+              "label": "66 %"
+            },
+            "75%": {
+              "label": "75 %"
+            },
+            "100%": {
+              "label": "100 %"
+            }
+          }
+        }
+      }
+    },
+    "menu": {
+      "name": "Menu",
+      "settings": {
+        "menu": {
+          "label": "Menu"
+        },
+        "width": {
+          "label": "Containerbredde",
+          "options": {
+            "25%": {
+              "label": "25 %"
+            },
+            "33%": {
+              "label": "33 %"
+            },
+            "50%": {
+              "label": "50 %"
+            },
+            "66%": {
+              "label": "66 %"
+            },
+            "75%": {
+              "label": "75 %"
+            },
+            "100%": {
+              "label": "100 %"
+            }
+          }
+        },
+        "alignment": {
+          "label": "Lodret justering",
+          "options": {
+            "top-left": {
+              "label": "Øverst til venstre"
+            },
+            "top-middle": {
+              "label": "Øverst i midten"
+            },
+            "top-right": {
+              "label": "Øverst til højre"
+            },
+            "middle-left": {
+              "label": "Midt på til venstre"
+            },
+            "center": {
+              "label": "I midten"
+            },
+            "middle-right": {
+              "label": "Midt på til højre"
+            },
+            "bottom-left": {
+              "label": "Nederst til venstre"
+            },
+            "bottom-middle": {
+              "label": "Nederst i midten"
+            },
+            "bottom-right": {
+              "label": "Nederst til højre"
+            }
+          }
+        }
+      }
+    },
+    "blog": {
+      "name": "Blog",
+      "settings": {
+        "blog": {
+          "label": "Blog"
+        },
+        "cover_image": {
+          "label": "Coverbillede"
+        },
+        "image_size": {
+          "label": "Billedets størrelse",
+          "options": {
+            "small": {
+              "label": "Lille"
+            },
+            "medium": {
+              "label": "Medium"
+            },
+            "large": {
+              "label": "Stor"
+            }
+          }
+        },
+        "description": {
+          "label": "Beskrivelse",
+          "default": "<p>Beskrivelse af din blog.</p>"
+        },
+        "show_number_articles": {
+          "label": "Vis antallet af artikler"
+        },
+        "width": {
+          "label": "Containerbredde",
+          "options": {
+            "25%": {
+              "label": "25 %"
+            },
+            "33%": {
+              "label": "33 %"
+            },
+            "50%": {
+              "label": "50 %"
+            },
+            "66%": {
+              "label": "66 %"
+            },
+            "75%": {
+              "label": "75 %"
+            },
+            "100%": {
+              "label": "100 %"
+            }
+          }
+        },
+        "alignment": {
+          "label": "Lodret justering",
+          "options": {
+            "top": {
+              "label": "Top"
+            },
+            "center": {
+              "label": "I midten"
+            },
+            "bottom": {
+              "label": "Bund"
+            }
+          }
+        }
+      }
+    },
+    "article": {
+      "name": "Artikel",
+      "settings": {
+        "article": {
+          "label": "Artikel"
+        },
+        "width": {
+          "label": "Containerbredde",
+          "options": {
+            "25%": {
+              "label": "25 %"
+            },
+            "33%": {
+              "label": "33 %"
+            },
+            "50%": {
+              "label": "50 %"
+            },
+            "66%": {
+              "label": "66 %"
+            },
+            "75%": {
+              "label": "75 %"
+            },
+            "100%": {
+              "label": "100 %"
+            }
+          }
+        },
+        "alignment": {
+          "label": "Lodret justering",
+          "options": {
+            "top-middle": {
+              "label": "Top"
+            },
+            "center": {
+              "label": "I midten"
+            },
+            "bottom-middle": {
+              "label": "Bund"
+            }
+          }
+        },
+        "cover_image": {
+          "label": "Coverbillede",
+          "options": {
+            "small": {
+              "label": "Lille"
+            },
+            "large": {
+              "label": "Stor"
+            },
+            "none": {
+              "label": "Ingen"
+            }
+          }
+        },
+        "show_author": {
+          "label": "Vis forfatter"
+        },
+        "show_date": {
+          "label": "Vis dato"
+        }
+      }
+    }
+  },
+  "presets": {
+    "custom-content": {
+      "name": "Tilpasset indhold",
+      "category": "Avanceret layout"
+    }
+  }
+},
+      "de.json": {
+  "name": "Personalisierter Content",
+  "settings": {
+    "title": {
+      "label": "Titel",
+      "default": "Personalisierter Content"
+    }
+  },
+  "blocks": {
+    "text": {
+      "name": "Text",
+      "settings": {
+        "title": {
+          "label": "Titel",
+          "default": "Erzählen Sie von Ihrer Marke"
+        },
+        "text": {
+          "label": "Text",
+          "default": "<p>Nutzen Sie diesen Text, um Infos über Ihre Marke mitzuteilen. Beschreiben Sie ein Produkt, kündigen Sie etwas an oder heißen Sie Kunden willkommen.</p>"
+        },
+        "width": {
+          "label": "Breite des Elements",
+          "options": {
+            "25%": {
+              "label": "25%"
+            },
+            "33%": {
+              "label": "33%"
+            },
+            "50%": {
+              "label": "50%"
+            },
+            "66%": {
+              "label": "66%"
+            },
+            "75%": {
+              "label": "75%"
+            },
+            "100%": {
+              "label": "100%"
+            }
+          }
+        },
+        "alignment": {
+          "label": "Vertikale Ausrichtung",
+          "options": {
+            "top-middle": {
+              "label": "Oben"
+            },
+            "center": {
+              "label": "Mitte"
+            },
+            "bottom-middle": {
+              "label": "Unten"
+            }
+          }
+        },
+        "align_text": {
+          "label": "Horizontale Ausrichtung",
+          "options": {
+            "left": {
+              "label": "Links"
+            },
+            "center": {
+              "label": "Mittig"
+            },
+            "right": {
+              "label": "Rechts"
+            }
+          }
+        }
+      }
+    },
+    "image": {
+      "name": "Foto",
+      "settings": {
+        "image": {
+          "label": "Foto"
+        },
+        "width": {
+          "label": "Breite des Elements",
+          "options": {
+            "25%": {
+              "label": "25%"
+            },
+            "33%": {
+              "label": "33%"
+            },
+            "50%": {
+              "label": "50%"
+            },
+            "66%": {
+              "label": "66%"
+            },
+            "75%": {
+              "label": "75%"
+            },
+            "100%": {
+              "label": "100%"
+            }
+          }
+        },
+        "alignment": {
+          "label": "Vertikale Ausrichtung",
+          "options": {
+            "top-left": {
+              "label": "Oben links"
+            },
+            "top-middle": {
+              "label": "Oben mittig"
+            },
+            "top-right": {
+              "label": "Oben rechts"
+            },
+            "middle-left": {
+              "label": "Mitte links"
+            },
+            "center": {
+              "label": "Mitte"
+            },
+            "middle-right": {
+              "label": "Mitte rechts"
+            },
+            "bottom-left": {
+              "label": "Unten links"
+            },
+            "bottom-middle": {
+              "label": "Unten mittig"
+            },
+            "bottom-right": {
+              "label": "Unten rechts"
+            }
+          }
+        }
+      }
+    },
+    "video": {
+      "name": "Video",
+      "settings": {
+        "video_url": {
+          "label": "YouTube oder Vimeo Link"
+        },
+        "width": {
+          "label": "Breite des Elements",
+          "options": {
+            "25%": {
+              "label": "25%"
+            },
+            "33%": {
+              "label": "33%"
+            },
+            "50%": {
+              "label": "50%"
+            },
+            "66%": {
+              "label": "66%"
+            },
+            "75%": {
+              "label": "75%"
+            },
+            "100%": {
+              "label": "100%"
+            }
+          }
+        },
+        "alignment": {
+          "label": "Vertikale Ausrichtung",
+          "options": {
+            "top-middle": {
+              "label": "Oben"
+            },
+            "center": {
+              "label": "Mitte"
+            },
+            "bottom-middle": {
+              "label": "Unten"
+            }
+          }
+        }
+      }
+    },
+    "product": {
+      "name": "Produkt",
+      "settings": {
+        "product": {
+          "label": "Produkt"
+        },
+        "width": {
+          "label": "Breite des Elements",
+          "options": {
+            "25%": {
+              "label": "25%"
+            },
+            "33%": {
+              "label": "33%"
+            },
+            "50%": {
+              "label": "50%"
+            },
+            "66%": {
+              "label": "66%"
+            },
+            "75%": {
+              "label": "75%"
+            },
+            "100%": {
+              "label": "100%"
+            }
+          }
+        },
+        "alignment": {
+          "label": "Vertikale Ausrichtung",
+          "options": {
+            "top-left": {
+              "label": "Oben links"
+            },
+            "top-middle": {
+              "label": "Oben mittig"
+            },
+            "top-right": {
+              "label": "Oben rechts"
+            },
+            "middle-left": {
+              "label": "Mitte links"
+            },
+            "center": {
+              "label": "Mitte"
+            },
+            "middle-right": {
+              "label": "Mitte rechts"
+            },
+            "bottom-left": {
+              "label": "Unten links"
+            },
+            "bottom-middle": {
+              "label": "Unten mittig"
+            },
+            "bottom-right": {
+              "label": "Unten rechts"
+            }
+          }
+        }
+      }
+    },
+    "collection": {
+      "name": "Kategorie",
+      "settings": {
+        "collection": {
+          "label": "Kategorie"
+        },
+        "width": {
+          "label": "Breite des Elements",
+          "options": {
+            "25%": {
+              "label": "25%"
+            },
+            "33%": {
+              "label": "33%"
+            },
+            "50%": {
+              "label": "50%"
+            },
+            "66%": {
+              "label": "66%"
+            },
+            "75%": {
+              "label": "75%"
+            },
+            "100%": {
+              "label": "100%"
+            }
+          }
+        }
+      }
+    },
+    "custom-html": {
+      "name": "Personalisierte HTML",
+      "settings": {
+        "code": {
+          "label": "HTML"
+        },
+        "width": {
+          "label": "Breite des Elements",
+          "options": {
+            "25%": {
+              "label": "25%"
+            },
+            "33%": {
+              "label": "33%"
+            },
+            "50%": {
+              "label": "50%"
+            },
+            "66%": {
+              "label": "66%"
+            },
+            "75%": {
+              "label": "75%"
+            },
+            "100%": {
+              "label": "100%"
+            }
+          }
+        }
+      }
+    },
+    "menu": {
+      "name": "Menü",
+      "settings": {
+        "menu": {
+          "label": "Menü"
+        },
+        "width": {
+          "label": "Breite des Elements",
+          "options": {
+            "25%": {
+              "label": "25%"
+            },
+            "33%": {
+              "label": "33%"
+            },
+            "50%": {
+              "label": "50%"
+            },
+            "66%": {
+              "label": "66%"
+            },
+            "75%": {
+              "label": "75%"
+            },
+            "100%": {
+              "label": "100%"
+            }
+          }
+        },
+        "alignment": {
+          "label": "Vertikale Ausrichtung",
+          "options": {
+            "top-left": {
+              "label": "Oben links"
+            },
+            "top-middle": {
+              "label": "Oben mittig"
+            },
+            "top-right": {
+              "label": "Oben rechts"
+            },
+            "middle-left": {
+              "label": "Mitte links"
+            },
+            "center": {
+              "label": "Mitte"
+            },
+            "middle-right": {
+              "label": "Mitte rechts"
+            },
+            "bottom-left": {
+              "label": "Unten links"
+            },
+            "bottom-middle": {
+              "label": "Unten mittig"
+            },
+            "bottom-right": {
+              "label": "Unten rechts"
+            }
+          }
+        }
+      }
+    },
+    "blog": {
+      "name": "Blog",
+      "settings": {
+        "description": {
+          "label": "Beschreibung",
+          "default": "<p>Beschreibung Ihres Blogs.</p>"
+        },
+        "blog": {
+          "label": "Blog"
+        },
+        "cover_image": {
+          "label": "Titelbild"
+        },
+        "image_size": {
+          "label": "Foto-Größe",
+          "options": {
+            "small": {
+              "label": "Klein"
+            },
+            "medium": {
+              "label": "Mittel"
+            },
+            "large": {
+              "label": "Groß"
+            }
+          }
+        },
+        "show_number_articles": {
+          "label": "Anzahl der Artikel anzeigen"
+        },
+        "width": {
+          "label": "Breite des Elements",
+          "options": {
+            "25%": {
+              "label": "25%"
+            },
+            "33%": {
+              "label": "33%"
+            },
+            "50%": {
+              "label": "50%"
+            },
+            "66%": {
+              "label": "66%"
+            },
+            "75%": {
+              "label": "75%"
+            },
+            "100%": {
+              "label": "100%"
+            }
+          }
+        },
+        "alignment": {
+          "label": "Vertikale Ausrichtung",
+          "options": {
+            "top": {
+              "label": "Oben"
+            },
+            "center": {
+              "label": "Mitte"
+            },
+            "bottom": {
+              "label": "Unten"
+            }
+          }
+        }
+      }
+    },
+    "article": {
+      "name": "Artikel",
+      "settings": {
+        "article": {
+          "label": "Artikel"
+        },
+        "width": {
+          "label": "Breite des Elements",
+          "options": {
+            "25%": {
+              "label": "25%"
+            },
+            "33%": {
+              "label": "33%"
+            },
+            "50%": {
+              "label": "50%"
+            },
+            "66%": {
+              "label": "66%"
+            },
+            "75%": {
+              "label": "75%"
+            },
+            "100%": {
+              "label": "100%"
+            }
+          }
+        },
+        "alignment": {
+          "label": "Vertikale Ausrichtung",
+          "options": {
+            "top-middle": {
+              "label": "Oben"
+            },
+            "center": {
+              "label": "Mitte"
+            },
+            "bottom-middle": {
+              "label": "Unten"
+            }
+          }
+        },
+        "cover_image": {
+          "label": "Titelbild",
+          "options": {
+            "small": {
+              "label": "Klein"
+            },
+            "large": {
+              "label": "Groß"
+            },
+            "none": {
+              "label": "Keine"
+            }
+          }
+        },
+        "show_author": {
+          "label": "Autor anzeigen"
+        },
+        "show_date": {
+          "label": "Datum anzeigen"
+        }
+      }
+    }
+  },
+  "presets": {
+    "custom-content": {
+      "name": "Personalisierter Content",
+      "category": "Komplizierteres Layout"
+    }
+  }
+}
+    }
+  }
+</script>
+
+
+
+<script type="text/javascript">
+
+/* Helpers */ 
+
+function flattenObject(ob) {
+    var toReturn = {};
+
+    for (var i in ob) {
+        if (!ob.hasOwnProperty(i)) continue;
+
+        if ((typeof ob[i]) == 'object' && ob[i] !== null) {
+            var flatObject = flattenObject(ob[i]);
+            for (var x in flatObject) {
+                if (!flatObject.hasOwnProperty(x)) continue;
+
+                toReturn[i + '.' + x] = flatObject[x];
+            }
+        } else {
+            toReturn[i] = ob[i];
+        }
+    }
+    return toReturn;
+}
+
+function getKeyByValue(object, value) {
+  return Object.keys(object).find(key => object[key] === value);
+}
+
+function resolve(obj, path , val){
+    path = path.split('.');
+    var current = obj;
+    while(path.length) {
+        if (path.length === 1) {
+          current[path.shift()] = val;
+        }
+        if(typeof current !== 'object') return undefined;
+        current = current[path.shift()];
+    }
+    return current;
+}
+
+/* Main */ 
+
+function translate(langOld) {
+  var result = JSON.parse(JSON.stringify(document.NEW_EN));
+
+  var flatNew = flattenObject(document.NEW_EN);
+
+  var flatOld = flattenObject(document.OLD_EN);
+
+  var flatLangOld = flattenObject(langOld);
+
+  Object.keys(flatNew).forEach((key) => {
+    var val = flatNew[key];
+    var keyOld = getKeyByValue(flatOld, val);
+    var transVal = keyOld ? flatLangOld[keyOld] : "xxx"
+    resolve(result, key, transVal);
+  });
+
+  return result;
+}
+
+
+function download(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
+
+var submit = document.getElementById('submit');
+
+submit.addEventListener('click', ()=> {
+  loadDataAuto();
+  
+  // For each language, run translation
+  Object.keys(document.OLD_LANG).forEach(key => {
+    download(
+      key, 
+      JSON.stringify(translate(document.OLD_LANG[key]))
+    )
+  });
+});
+
+
+</script>
