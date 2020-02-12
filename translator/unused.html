@@ -1,0 +1,151 @@
+<section>
+<h4>This utility verifies if any strings from en.json are unreferenced in schema.json</h3>
+<h2>schema.json</h2><textarea id="schema"></textarea>
+<h2>en.json</h2><textarea id="lang"></textarea>
+</section>
+
+<section>
+  <button id="submit">Start</button>
+</section>
+
+<section id="results" class="hidden" style="background-color: azure;">
+  <h4>Following keys from en.json are not used in schema and have been removed:</h3>
+  <ul id="results__list"></ul>
+  <h2>updated en.json</h2><textarea id="updated"></textarea>
+</section>
+
+<style>
+
+section {
+  padding: 20px;
+}
+textarea {
+  width: 100%;
+  height: 180px;
+  resize: none;
+}
+
+button {
+  padding: 20px;
+  min-width: 200px;
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #77b058;
+  color: white;
+  font-weight: bold;
+}
+
+.hidden {
+  display: none !important;
+}
+
+#results__list {
+  color: red;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+</style>
+
+
+<script type="text/javascript">
+
+  /* Load Data */ 
+
+  function loadDataAuto() {
+    document.lang = JSON.parse(document.getElementById("lang").value);
+    document.schema = document.getElementById("schema").value;
+  }
+
+</script>
+
+<script type="text/javascript">
+
+/* Helpers */ 
+
+function flattenObject(ob) {
+    var toReturn = {};
+
+    for (var i in ob) {
+        if (!ob.hasOwnProperty(i)) continue;
+
+        if ((typeof ob[i]) == 'object' && ob[i] !== null) {
+            var flatObject = flattenObject(ob[i]);
+            for (var x in flatObject) {
+                if (!flatObject.hasOwnProperty(x)) continue;
+
+                toReturn[i + '.' + x] = flatObject[x];
+            }
+        } else {
+            toReturn[i] = ob[i];
+        }
+    }
+    return toReturn;
+}
+
+function unflattenObject(data) {
+  var result = {}
+  for (var i in data) {
+    var keys = i.split('.')
+    keys.reduce(function(r, e, j) {
+      return r[e] || (r[e] = isNaN(Number(keys[j + 1])) ? (keys.length - 1 == j ? data[i] : {}) : [])
+    }, result)
+  }
+  return result
+}
+
+function download(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
+
+function clear() {
+  document.getElementById('results').classList.add('hidden');
+  document.getElementById('results__list').innerHTML = '';
+  document.getElementById('updated').value = '';
+}
+
+
+
+/* Main */ 
+
+var submit = document.getElementById('submit');
+
+submit.addEventListener('click', ()=> {
+  clear();
+  loadDataAuto();
+
+  var flat = flattenObject(document.lang);
+  var notFound = [];
+
+  var resultsList = document.getElementById('results__list');
+
+  Object.keys(flat).forEach(key => {
+    if (document.schema.indexOf(key) === -1) {
+      delete flat[key];
+      notFound.push(key);
+      var item = document.createElement('li');
+      item.innerText = key;
+      resultsList.appendChild(item);
+    }
+  });
+
+  if(notFound.length > 0) {
+    document.getElementById('results').classList.remove('hidden');
+  }
+
+  document.getElementById('updated').value = JSON.stringify(unflattenObject(flat), undefined, 2);
+});
+
+
+</script>
