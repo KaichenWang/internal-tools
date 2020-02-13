@@ -63,7 +63,7 @@ class RemoveUnreferencedStrings extends React.Component {
 
     render() {
         return (
-            <Page title={utils[1].title} breadcrumbs={[{ content: 'Utilities', url: '/' }]}>
+            <Page title={utils[1].title} breadcrumbs={[{ content: 'Utilities', url: process.env.PUBLIC_URL}]}>
                 <Layout>
                     <Layout.Section>
                         <TextContainer>

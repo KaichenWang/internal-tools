@@ -44,7 +44,7 @@ class RemapTranslations extends React.Component {
 
     render() {
         return (
-            <Page title={utils[2].title} breadcrumbs={[{ content: 'Utilities', url: '/' }]}>
+            <Page title={utils[2].title} breadcrumbs={[{ content: 'Utilities', url: process.env.PUBLIC_URL }]}>
                 <Layout>
                     <Layout.Section>
                         <TextContainer>
