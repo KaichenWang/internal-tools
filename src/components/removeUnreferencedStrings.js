@@ -88,13 +88,13 @@ class RemoveUnreferencedStrings extends React.Component {
                             {this.state.keys.length === 0 &&
                                 <Banner
                                     title="All keys in en.json are used in schema"
-                                    status="info"
+                                    status="success"
                                 />
                             }
                             {this.state.keys.length > 0 &&
                                 <Banner
                                     title="Following keys from en.json are not used in schema and have been removed:"
-                                    status="warning"
+                                    status="success"
                                 >
 
                                     <List type="bullet">
