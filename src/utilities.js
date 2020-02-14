@@ -28,3 +28,26 @@ export const unflattenObject = (data) => {
   }
   return result
 }
+
+export const download = (filename, text) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      var element = document.createElement('a');
+      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+      element.setAttribute('download', filename);
+
+      element.style.display = 'none';
+      document.body.appendChild(element);
+
+      element.click();
+
+      document.body.removeChild(element);
+
+      resolve("Success!");
+    }, 150);
+  });
+}
+
+export const getKeyByValue = (object, value) => {
+  return Object.keys(object).find(key => object[key] === value);
+}

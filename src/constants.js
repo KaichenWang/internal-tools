@@ -11,7 +11,28 @@ const constants = {
             title: 'Remap translation strings',
             description: 'This utility remaps locale files to a new structure'
         }
-    }
+    },
+    locales: [
+        'da',
+        'de',
+        'en',
+        'es',
+        'fi',
+        'fr',
+        'hi',
+        'it',
+        'ja',
+        'ko',
+        'ms',
+        'nb',
+        'nl',
+        'pt-BR',
+        'pt-PT',
+        'sv',
+        'th',
+        'zh-CN',
+        'zh-TW'
+    ]
 }
 
 export default constants;

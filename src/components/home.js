@@ -9,7 +9,6 @@ import banner from '../assets/banner.png';
 import constants from '../constants'
 
 import {
-    BrowserRouter as Router,
     Link
 } from "react-router-dom";
 
@@ -21,7 +20,7 @@ function Home() {
         <Page title="Utilities">
             <Layout>
             <Layout.Section>
-            <img src={banner} style={{width: "100%", marginBottom: "1em"}}></img>
+            <img alt="Utilities" src={banner} style={{width: "100%", marginBottom: "1em"}}></img>
             </Layout.Section>
             </Layout>
             <Layout>
