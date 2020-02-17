@@ -10,6 +10,11 @@ const constants = {
             path: '/remap-translations',
             title: 'Remap translation strings',
             description: 'This utility remaps locale files to a new structure'
+        },
+        '3': {
+            path: '/extract-links',
+            title: 'Extract links',
+            description: 'This utility extracts links from a block of text'
         }
     },
     locales: [

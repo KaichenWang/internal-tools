@@ -65,7 +65,7 @@ class RemoveUnreferencedStrings extends React.Component {
                 <Layout>
                     <Layout.Section>
                         <TextContainer>
-                            <p>This utility verifies if any strings from en.json are unreferenced in schema.json</p>
+                            <p>{utils[1].description}</p>
                         </TextContainer>
                     </Layout.Section>
                     <Layout.Section>

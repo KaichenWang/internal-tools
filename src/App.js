@@ -8,6 +8,7 @@ import constants from './constants';
 import Home from './components/home';
 import RemoveUnreferencedStrings from './components/removeUnreferencedStrings';
 import RemapTranslations from './components/remapTranslations';
+import ExtractLinks from './components/extractLinks';
 
 const utils = constants.utilities;
 
@@ -20,6 +21,9 @@ export default function App() {
         </Route>
         <Route path={utils[2].path}>
           <RemapTranslations />
+        </Route>
+        <Route path={utils[3].path}>
+          <ExtractLinks />
         </Route>
         <Route path="/">
           <Home />

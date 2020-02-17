@@ -96,7 +96,7 @@ class RemapTranslations extends React.Component {
                 <Layout>
                     <Layout.Section>
                         <TextContainer>
-                            <p>This utility remaps locale files to a new structure</p>
+                            <p>{utils[2].description}</p>
                         </TextContainer>
                     </Layout.Section>
                     <Layout.Section>
