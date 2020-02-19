@@ -4,7 +4,10 @@ import {
     Page,
     Card,
     Button,
+    Badge,
+    Icon
 } from '@shopify/polaris';
+import { ExternalSmallMinor } from '@shopify/polaris-icons';
 import banner from '../assets/banner.png';
 import constants from '../constants'
 
@@ -38,7 +41,27 @@ function Home() {
                         </Layout.Section>
                     );
                 })}
-                {Object.keys(utils).length % 2 !== 0 &&
+                <Layout.Section oneHalf>
+                    <Card>
+                        <Card.Header title="Toggle all collapsibles">
+                            <Badge>Chrome extension</Badge>
+                        </Card.Header>
+                        <Card.Section>
+                            Toggles all collapsibles on a page from "themes.shopify.com" with one click
+                        </Card.Section>
+                        <Card.Section>
+                            <a target="_blank" href="https://chrome.google.com/webstore/detail/toggle-all-collapsibles/abecpmipjeckjjnkddmjaphidooeinid">
+                                <Button>
+                                    <div style={{ display: "flex", alignItems: "center" }}>
+                                        <span style={{ paddingRight: "0.5em" }}>Try it</span>
+                                        <Icon source={ExternalSmallMinor} />
+                                    </div>
+                                </Button>
+                            </a>
+                        </Card.Section>
+                    </Card>
+                </Layout.Section>
+                {Object.keys(utils).length % 2 + 1 !== 0 &&
                     <Layout.Section oneHalf></Layout.Section>
                 }
             </Layout>
