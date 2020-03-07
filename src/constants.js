@@ -28,7 +28,6 @@ const constants = {
         'it',
         'ja',
         'ko',
-        'ms',
         'nb',
         'nl',
         'pt-BR',
