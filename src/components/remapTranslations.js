@@ -7,7 +7,8 @@ import {
     FormLayout,
     Badge,
     Banner,
-    List
+    List,
+    DropZone
 } from '@shopify/polaris';
 
 import constants from '../constants'
@@ -23,17 +24,33 @@ class RemapTranslations extends React.Component {
             enNew: '',
             langOld: {},
             missing: [],
-            complete: false
+            complete: false,
+            error: {
+                title: '',
+                message: ''
+            },
         }
     }
 
+    reset = () => {
+        this.setState({
+            complete: false,
+            error: {
+                title: '',
+                message: ''
+            }
+        })
+    }
+
     onChangeHandlerNew = (enNew) => {
+        this.reset();
         this.setState({
             enNew
         })
     }
 
     onChangeHandlerLang = (locale, lang) => {
+        this.reset();
         const langOld = {
             ...this.state.langOld
         }
@@ -48,37 +65,105 @@ class RemapTranslations extends React.Component {
         })
     }
 
+    onChangeHandlerUpload = (files) => {
+        this.reset();
+        const langOld = {};
+
+        const readFile = (file) => {
+            return new Promise((resolve, reject) => {
+                var reader = new FileReader();
+                reader.onload = () => {
+                    const key = file.name.substr(0, file.name.lastIndexOf('.'));
+                    if (constants.locales.includes(key)) {
+                        langOld[key] = reader.result;
+                    }
+                    resolve();
+                }
+                reader.readAsText(file);
+            })
+        }
+
+        Array.from(files).reduce(async (previousPromise, file) => {
+            await previousPromise;
+
+            return readFile(file);
+        }, Promise.resolve()).then(() => {
+            this.setState({
+                langOld
+            });
+        });
+    }
+
     onClickHandlerRemap = () => {
+        this.reset();
         const state = this.state;
         const missing = [];
 
-        function translate(langOld, langKey) {
-            var result = flattenObject(JSON.parse(state.enNew));
-            var flatNew = flattenObject(JSON.parse(state.enNew));
-            var flatOld = flattenObject(JSON.parse(state.langOld['en']));
-            var flatLangOld = flattenObject(JSON.parse(langOld));
-
-            Object.keys(flatNew).forEach((key) => {
-                var val = flatNew[key];
-                var keyOld = getKeyByValue(flatOld, val);
-                if (keyOld) {
-                    result[key] = flatLangOld[keyOld];
-                }
-                else {
-                    delete result[key]
-                    missing.push(`${langKey}.json - ${key}`)
+        if (state.enNew.length === 0) {
+            this.setState({
+                error: {
+                    title: 'Error',
+                    message: 'No updated en.json defined'
                 }
             });
+            return -1;
+        }
 
-            const unflat = unflattenObject(result);
-            const unflatString = JSON.stringify(unflat, undefined, 2);
-            return unflatString;
+        if (Object.keys(state.langOld).length === 0) {
+            this.setState({
+                error: {
+                    title: 'Error',
+                    message: 'No locale files defined'
+                }
+            });
+            return -1;
+        }
+
+
+        function translate(langOld, langKey) {
+            try {
+                var result = flattenObject(JSON.parse(state.enNew));
+                var flatNew = flattenObject(JSON.parse(state.enNew));
+                var flatOld = flattenObject(JSON.parse(state.langOld['en']));
+                var flatLangOld = flattenObject(JSON.parse(langOld));
+
+                Object.keys(flatNew).forEach((key) => {
+                    var val = flatNew[key];
+                    var keyOld = getKeyByValue(flatOld, val);
+                    if (keyOld) {
+                        result[key] = flatLangOld[keyOld];
+                    }
+                    else {
+                        delete result[key]
+                        missing.push(`${langKey}.json - ${key}`)
+                    }
+                });
+
+                const unflat = unflattenObject(result);
+                const unflatString = JSON.stringify(unflat, undefined, 2);
+                return unflatString;
+            }
+            catch (error) {
+                return error;
+            }
         }
 
         Object.keys(state.langOld).reduce(async (previousPromise, key) => {
             await previousPromise;
-            if(key !== 'en') {
-                return download(`${key}.json`, translate(state.langOld[key], key));
+            if (key !== 'en') {
+                const translation = translate(state.langOld[key], key);
+                if (translation instanceof Error) {
+                    this.setState({
+                        error: {
+                            title: 'Error',
+                            message: translation.message
+                        }
+                    });
+                    return Promise.reject();
+                }
+                else {
+                    return download(`${key}.json`, translation);
+                }
             } else {
                 return Promise.resolve();
             }
@@ -100,10 +185,10 @@ class RemapTranslations extends React.Component {
                         </TextContainer>
                     </Layout.Section>
                     <Layout.Section>
-                        <Card primaryFooterAction={{ content: 'Remap', onAction: this.onClickHandlerRemap.bind(this) }}>
+                        <Card primaryFooterAction={{ content: 'Download updated locales', onAction: this.onClickHandlerRemap.bind(this) }}>
                             <Card.Section subdued>
                                 <FormLayout>
-                                <Badge status="success">Updated file</Badge>
+                                    <Badge status="success">Updated file</Badge>
                                     <label>en.json</label>
                                     <textarea value={this.state.enNew} onChange={(e) => this.onChangeHandlerNew(e.target.value)} style={{ width: "100%", height: "100px", resize: "none" }} ></textarea>
                                 </FormLayout>
@@ -111,6 +196,10 @@ class RemapTranslations extends React.Component {
                             <Card.Section>
                                 <FormLayout>
                                     <Badge status="attention">Original files</Badge>
+                                    <DropZone label="Select locale files" onDrop={e => { this.onChangeHandlerUpload(e) }}>
+                                        <DropZone.FileUpload />
+                                    </DropZone>
+
                                     {constants.locales.map(locale => {
                                         return (
                                             <React.Fragment key={locale}>
@@ -130,7 +219,7 @@ class RemapTranslations extends React.Component {
                                 status="success"
                             />
                         }
-                        {this.state.complete &&
+                        {this.state.complete && this.state.missing.length > 0 &&
                             <Banner
                                 title="Following translations could not be remapped:"
                                 status="warning"
@@ -140,6 +229,14 @@ class RemapTranslations extends React.Component {
                                         return (<List.Item key={key}>{key}</List.Item>)
                                     })}
                                 </List>
+                            </Banner>
+                        }
+                        {this.state.error.title.length > 0 &&
+                            <Banner
+                                title={this.state.error.title}
+                                status="critical"
+                            >
+                                <p>{this.state.error.message}</p>
                             </Banner>
                         }
                     </Layout.Section>
